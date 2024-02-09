@@ -1,0 +1,46 @@
+int val = 0;
+int count = 0;     // Will use this variable to count and increment per revolution
+int enable_cycle = 1;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(9, INPUT);
+  pinMode(1, INPUT);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(7, INPUT);
+  pinMode(8, INPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  val = analogRead(1);
+
+  if(digitalRead(7)==HIGH)
+  {
+    analogWrite(2,val);
+  }
+  else{
+    analogWrite(2,0);
+  }
+  if(digitalRead(8)==HIGH){
+    analogWrite(3,val);
+  }
+  else{
+    analogWrite(3,0);
+  }
+  
+  if(digitalRead(9)==HIGH && enable_cycle == 1)                          //350clicks  = 1 Revolution
+  {                                                                     //Actual bot has 350 clicks = 1 Rev
+    count = count +1;
+    enable_cycle = 0;
+  } 
+  if (digitalRead(9)==LOW && enable_cycle==0){
+    enable_cycle = 1;
+  }  
+  Serial.println(count);  
+  Serial.print("Counting");              
+}
