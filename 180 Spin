@@ -1,0 +1,79 @@
+void One_eighty_Spin(int val0, int val1, int val2, int val3)
+{
+  // Define motor control pins
+const int leftMotorForwardPin = 2;
+const int leftMotorBackwardPin = 3;
+const int rightMotorForwardPin = 4;
+const int rightMotorBackwardPin = 5;
+
+// Define time constants
+const int forwardTime = 1000; // Time to move forward in milliseconds
+const int turnTime = 500; // Time to turn in milliseconds
+
+void setup() {
+  // Initialize motor control pins as outputs
+  pinMode(leftMotorForwardPin, OUTPUT);
+  pinMode(leftMotorBackwardPin, OUTPUT);
+  pinMode(rightMotorForwardPin, OUTPUT);
+  pinMode(rightMotorBackwardPin, OUTPUT);
+}
+
+void loop() {
+  // Move forward for a certain time
+  moveForward();
+  delay(forwardTime);
+
+  // Turn right (adjust according to your setup for desired maneuver)
+  turnRight();
+  delay(turnTime);
+
+  // Stop motors
+  stopMotors();
+
+  // Move forward for a certain time
+  moveForward();
+  delay(forwardTime);
+
+  // Turn left (to complete the 180-degree maneuver)
+  turnLeft();
+  delay(turnTime);
+
+  // Stop motors
+  stopMotors();
+
+  // End of maneuver, repeat or do other operations
+}
+
+// Function to move both motors forward
+void moveForward() {
+  digitalWrite(leftMotorForwardPin, HIGH);
+  digitalWrite(leftMotorBackwardPin, LOW);
+  digitalWrite(rightMotorForwardPin, HIGH);
+  digitalWrite(rightMotorBackwardPin, LOW);
+}
+
+// Function to turn right
+void turnRight() {
+  digitalWrite(leftMotorForwardPin, HIGH);
+  digitalWrite(leftMotorBackwardPin, LOW);
+  digitalWrite(rightMotorForwardPin, LOW);
+  digitalWrite(rightMotorBackwardPin, LOW);
+}
+
+// Function to turn left
+void turnLeft() {
+  digitalWrite(leftMotorForwardPin, LOW);
+  digitalWrite(leftMotorBackwardPin, LOW);
+  digitalWrite(rightMotorForwardPin, HIGH);
+  digitalWrite(rightMotorBackwardPin, LOW);
+}
+
+// Function to stop both motors
+void stopMotors() {
+  digitalWrite(leftMotorForwardPin, LOW);
+  digitalWrite(leftMotorBackwardPin, LOW);
+  digitalWrite(rightMotorForwardPin, LOW);
+  digitalWrite(rightMotorBackwardPin, LOW);
+}
+
+}
