@@ -1,10 +1,12 @@
-void One_eighty_Spin(int val0, int val1, int val2, int val3)
-{
   // Define motor control pins
 const int leftMotorForwardPin = 2;
 const int leftMotorBackwardPin = 3;
 const int rightMotorForwardPin = 4;
 const int rightMotorBackwardPin = 5;
+
+void One_eighty_Spin(int val0, int val1, int val2, int val3)
+{
+
 
 // Define time constants
 const int forwardTime = 1000; // Time to move forward in milliseconds
