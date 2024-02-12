@@ -1,6 +1,6 @@
 int val = 0;
 int count = 0;     // Will use this variable to count and increment per revolution
-int enable_cycle = 1;
+int enable_cycle = 1; // This variable will used to keep track of the times the motor is on and help keep track of count variable
 
 
 void setup() {
