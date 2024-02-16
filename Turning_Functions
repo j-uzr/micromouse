@@ -1,21 +1,76 @@
-  void turnRight() {
+int enable = 1;
+int countTurn = 0;
 
-    delay(1000);
-    analogWrite(5, 0); // FWD Right Off
-    analogWrite(6, 0); // REV Left Off
-    analogWrite(7, 100); // REV Right On
-    analogWrite(4, 150); // FWD Left On
-    delay(5000);
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(4, OUTPUT); // FWD Left
+  pinMode(5, OUTPUT); // FWD Right
+  pinMode(6, OUTPUT); // REV Left
+  pinMode(7, OUTPUT); // REV Right
+
+  pinMode(9, INPUT); // Encoder Left
+
+}
+
+void loop() {
+
+  turn_Right();
+  turn_Left();
+
+}
+
+  void turn_Right() {
+
+    // motors off
+    analogWrite(5, 0);
+    analogWrite(6, 0);
+    analogWrite(7, 0);
+    analogWrite(4, 0);
+    
+    
+    while (countTurn <= 250) {
+      
+      analogWrite(7, 150); // REV Right On
+      analogWrite(4, 170); // FWD Left On
+
+      if (enable == 1 && digitalRead(9) == HIGH) {
+        countTurn = countTurn + 1;
+        enable = 0;
+      }
+      if (enable == 0 && digitalRead(9) == LOW) {
+        enable = 1;
+      }
+      // motors off
+      analogWrite(7, 0);
+      analogWrite(4, 0);
+    }
 
   }
   
-  void turnLeft() {
+  void turn_Left() {
 
-    delay(1000);
-    analogWrite(4, 0); // FWD Left Off
-    analogWrite(7, 0); // REV Right Off
-    analogWrite(6, 100); // REV Left On
-    analogWrite(5, 150); // FWD Right On
-    delay(5000);
+    // motors off
+    analogWrite(5, 0);
+    analogWrite(6, 0);
+    analogWrite(7, 0);
+    analogWrite(4, 0);
+    
+    
+    while (countTurn <= 250) {
+      
+      analogWrite(6, 150); // REV Right On
+      analogWrite(5, 170); // FWD Left On
+
+      if (enable == 1 && digitalRead(9) == HIGH) {
+        countTurn = countTurn + 1;
+        enable = 0;
+      }
+      if (enable == 0 && digitalRead(9) == LOW) {
+        enable = 1;
+      }
+      // motors off
+      analogWrite(6, 0);
+      analogWrite(5, 0);
+    }
 
   }
